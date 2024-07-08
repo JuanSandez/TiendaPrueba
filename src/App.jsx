@@ -19,18 +19,25 @@ function App() {
       <ContextProvider>
         <BrowserRouter>
           <Navbar />
-          {!user.length > 0 ? (
-            <Formulario setUser={setUser} />
-          ) : (
-            <Home user={user} setUser={setUser} />
-          )}
+
           <Routes>
-            <Route path="/" element={<ItemListContainer />} />
+            <Route path="/" element={<ItemListContainer title="Tienda" />} />
+            <Route path="/categoria/:categoryId" element={<ItemListContainer title="Tienda" />} />
             <Route
               path="/producto/:productId"
               element={<ItemDetailContainer />}
             />
             <Route path="/cart" element={<Cart />} />
+
+            {!user.length > 0 ? (
+              <Route path="/login" element={<Formulario setUser={setUser} />} />
+            ) : (
+              <Route
+                path="/login"
+                element={<Home user={user} setUser={setUser} />}
+              />
+            )}
+
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>

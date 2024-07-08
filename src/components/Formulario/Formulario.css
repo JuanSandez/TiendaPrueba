@@ -3,6 +3,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    height: 57vh;
 }
 .formulario-btn{
     margin-top: 10px;

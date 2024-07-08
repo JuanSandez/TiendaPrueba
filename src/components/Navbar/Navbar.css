@@ -1,0 +1,21 @@
+
+.material-symbols-outlined{
+    padding: 10px;
+    color: #fff;
+}
+.contador{
+    position: absolute;
+    top: 5px; 
+    right: 10px;
+    background: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+  }
+  .material-symbols-outlined.delete{
+    color: black;
+  }
