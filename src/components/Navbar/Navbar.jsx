@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Navbar.css";
 import CartWidget from "../CartWidget/CartWidget";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { getProductos, productos } from "../../data/asyncMock";
+import Context from "../../context/CartContext";
 
 const Navbar = () => {
-  const [busqueda, setBusqueda] = useState(""); //Almacena el término de búsqueda que el usuario ingresa.
-  const [filtroResultado, setFiltroResultado] = useState([]); //Almacena los resultados filtrados basados en el término de búsqueda.
-  const [data, setData] = useState({ data: [] }); //Almacena los datos que se obtienen de una API, en este caso, una lista de ropa.
+  const [busqueda, setBusqueda] = useState("");
+  const [filtroResultado, setFiltroResultado] = useState([]);
+  const [data, setData] = useState({ data: [] });
+  const { user } = useContext(Context);
 
-  const location = useLocation(); //Sirve para obtener la ubicación actual del navegador
+  const location = useLocation();
 
   useEffect(() => {
-    //1)Se llama getProductos para obtener datos, y luego se actualiza el estado data con estos datos:
     getProductos().then((data) => setData(data));
   }, []);
 
@@ -70,42 +71,92 @@ const Navbar = () => {
                   Home
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" href="#" to={"/login"}>
-                  Login
-                </Link>
-              </li>
+
               <li className="nav-item dropdown">
                 <NavLink
-                  className="nav-link dropdown-toggle"
+                  className="nav-link dropdown-toggle d-flex align-items-center"
                   to="#"
                   role="button"
                   data-bs-toggle="dropdown"
-                  aria-expanded="false"
+                  aria-expanded="true"
                 >
                   Productos
                 </NavLink>
                 <ul className="dropdown-menu">
                   <li>
-                    <Link className="dropdown-item" to='/categoria/Remera'>
+                    <Link className="dropdown-item" to="/categoria/Remera">
                       Remeras
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" to='/categoria/Jeans'>
+                    <Link className="dropdown-item" to="/categoria/Jeans">
                       Jeans
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" to='/categoria/Camperas'>
+                    <Link className="dropdown-item" to="/categoria/Camperas">
                       Camperas
                     </Link>
                   </li>
-                  
                 </ul>
               </li>
-              
+
+              <li className="nav-item dropdown">
+                <NavLink
+                  className="nav-link dropdown-toggle d-flex align-items-center"
+                  to="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <span
+                    className="material-symbols-outlined user"
+                    style={{ lineHeight: "0.2", fontSize: "1.5rem" }}
+                  >
+                    person
+                  </span>
+                </NavLink>
+                <ul className="dropdown-menu">
+                  {user ? (
+                    <>
+                      <li className="nav-item">
+                        <Link className="btn btn-light text-danger">
+                          {user.displayName || "Usuario"}
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link className="btn btn-danger" to={"/logout"}>
+                          Salir
+                        </Link>
+                      </li>
+                    </>
+                  ) : (
+                    <>
+                      <li className="nav-item">
+                        <Link
+                          className="nav-link active"
+                          href="#"
+                          to={"/login"}
+                        >
+                          Login
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link
+                          className="nav-link active"
+                          to={"/registro"}
+                          aria-current="page"
+                          href="#"
+                        >
+                          Registro
+                        </Link>
+                      </li>
+                    </>
+                  )}
+                </ul>
+              </li>
             </ul>
+
             <form className="d-flex" role="search" onSubmit={handleSearch}>
               <input
                 className="form-control me-2"
@@ -146,7 +197,6 @@ const Navbar = () => {
           ))}
         </div>
       )}
-      
     </>
   );
 };

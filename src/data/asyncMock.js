@@ -54,6 +54,25 @@ export const productos = [
         stock: 5 
     }
 ];
+export const Slide = [
+    {
+        id:1,
+        imagen:"https://i.ibb.co/ChsMJ7B/slide-Image1.jpg" 
+    },
+    {
+        id:2,
+        imagen:"https://i.ibb.co/xsp210x/slide-Image2.jpg" 
+    },
+    {
+        id:3,
+        imagen:"https://i.ibb.co/kJ62ZmR/slide-Image3.jpg"
+    }
+]
+export const getImagenSlide = () => {
+    return new Promise((resolve) => {
+        resolve(Slide)
+    });
+}
 
 export const getProductos = () => {
     return new Promise((resolve) => {

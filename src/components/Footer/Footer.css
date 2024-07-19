@@ -1,0 +1,21 @@
+.footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: red;
+    height: 40vh;
+    color: #fff;
+}
+.footer img{
+    width: 50px;
+    display: flex;
+    flex-direction: row;
+    padding-left: 5px;
+}
+.footer-card{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 20px;
+    
+}

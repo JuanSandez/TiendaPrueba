@@ -14,14 +14,14 @@ const ItemCount = ({ stock, initialValue, onAdd }) => {
   return (
     <div className="container">
       <div className="d-flex justify-content-center align-items-center">
-        <button className="btn btn-secondary mx-2" onClick={decrementar}>
+        <button className="btn btn-danger mx-2" onClick={decrementar}>
           -
         </button>
         <h2 className="mx-2">{count}</h2>
-        <button className="btn btn-secondary mx-2" onClick={incrementar}>
+        <button className="btn btn-danger mx-2" onClick={incrementar}>
           +
         </button>
-        <Link className="btn btn-success" onClick={handleAdd}>Agregar al carrito</Link>
+        <Link className="btn btn-danger" onClick={handleAdd}>Agregar al carrito</Link>
       </div>
     </div>
   );

@@ -1,39 +1,47 @@
-import React, { useState } from "react";
-import "./Formulario.css";
-import Home from "../Home/Home";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import React from "react";
+import { useState } from "react";
+import { auth } from "../../config/firebase";
 
-
-const Formulario = ({ setUser }) => {
+const Register = () => {
   const [nombre, setNombre] = useState("");
-  const [contraseña, setContraseña] = useState("");
   const [email, setEmail] = useState("");
-  const [error, setError] = useState(false);
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (nombre === "" || contraseña === "" || email === "") {
-      setError(true);
-      return;
+    setError(null);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth,email, password);
+      const user = userCredential.user;
+
+      await updateProfile(user, {
+        displayName: nombre
+      });
+      alert("Usuario registrado con exito");
+    } catch (err) {
+      setError(err.message);
     }
-    setError(false);
-    setUser([nombre]);
   };
   return (
-    <form className="formulario" onSubmit={handleSubmit}>
+    <div className="container d-flex justify-content-center">
+      <div className="col-md-6">
+    <form onSubmit={handleSubmit}>
+      <h2>Registro</h2>
       <div className="mb-3">
-        <label htmlFor="exampleInputEmail1" className="form-label">
+      <label htmlFor="exampleInputEmail1" className="form-label">
           Nombre:
         </label>
         <input
-          
           type="text"
           className="form-control"
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
           value={nombre}
-          onChange={(event) => setNombre(event.target.value)}
+          onChange={(e)=> setNombre(e.target.value)}
         />
+
         <label htmlFor="exampleInputEmail1" className="form-label">
           Email:
         </label>
@@ -43,22 +51,22 @@ const Formulario = ({ setUser }) => {
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
           value={email}
-          onChange={(event) => setEmail(event.target.value)}
+          onChange={(e)=> setEmail(e.target.value)}
         />
         <div id="emailHelp" className="form-text">
-          Nunca compartiremos su correo electrónico con nadie más.
+          We'll never share your email with anyone else.
         </div>
       </div>
       <div className="mb-3">
         <label htmlFor="exampleInputPassword1" className="form-label">
-          Contraseña:
+          Password:
         </label>
         <input
           type="password"
           className="form-control"
           id="exampleInputPassword1"
-          value={contraseña}
-          onChange={(event) => setContraseña(event.target.value)}
+          value={password}
+          onChange={(e)=> setPassword(e.target.value)}
         />
       </div>
       <div className="mb-3 form-check">
@@ -72,11 +80,13 @@ const Formulario = ({ setUser }) => {
         </label>
       </div>
       <button type="submit" className="btn btn-primary">
-        Enviar
+        Registrarse
       </button>
-      {error && <p>Todos los campos son obligatorios*</p>}
+      {error && <p>{error}</p>}
     </form>
+    </div>
+    </div>
   );
 };
 
-export default Formulario;
+export default Register;

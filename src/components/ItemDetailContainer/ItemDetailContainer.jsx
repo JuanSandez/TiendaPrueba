@@ -3,7 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getProductosById } from "../../data/asyncMock";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import { BarLoader } from "react-spinners";
+import { db } from "../../config/firebase";
 
+import { doc, getDoc } from "firebase/firestore";
 const ItemDetailContainer = () => {
   const [producto, setProducto] = useState({});
   const [loading, setLoading] = useState(true);
@@ -13,31 +15,28 @@ const ItemDetailContainer = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getProductosById(productId)
-      .then((prod) => {
-        if (!prod) {
-          navigate("/*");
-        } else {
-          setProducto(prod);
-        }
-      })
-      .catch((error) => console.log(error));
-  }, [productId]);
+    const getProduct = async () => {
+      try {
+        const queryRef = doc(db, "productos", productId);
+        
+        const response = await getDoc(queryRef);
+        
+        const newItem = {
+          ...response.data(),
+          id: response.id,
+        };
+        
+        setProducto(newItem);
+        // console.log(response);
+      } catch (error) {
+        console.error("Error al obtener el producto de Firebase:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  useEffect(() => {
     setLoading(true);
-
-    setTimeout(() => {
-      getProductosById(productId)
-        .then((prod) => {
-          setProducto(prod);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.error(err);
-          setLoading(false);
-        });
-    }, 2000);
+    getProduct();
   }, [productId]);
 
   return (
