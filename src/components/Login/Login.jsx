@@ -9,6 +9,8 @@ const Login = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  
+
   useEffect(() => {
     const unsubcribe = auth.onAuthStateChanged((user) => {
       if (user) {
@@ -28,6 +30,7 @@ const Login = () => {
       setError(err.message);
     }
   };
+  
 
   return (
     <div className="container d-flex justify-content-center">
@@ -77,6 +80,9 @@ const Login = () => {
           </button>
           {error && <p>Todos los campos son obligatorios*</p>}
         </form>
+        
+
+
       </div>
     </div>
   );
