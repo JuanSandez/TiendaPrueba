@@ -7,7 +7,7 @@ const CartWidget = () => {
   return (
     <>
     <div>
-      <span className="material-symbols-outlined">shopping_cart</span>
+      <span className="material-symbols-outlined carrito">shopping_cart</span>
     </div>
     <div >
       <p className="contador">{getQuantity()}</p>

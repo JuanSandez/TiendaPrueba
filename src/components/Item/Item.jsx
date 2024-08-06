@@ -10,7 +10,7 @@ const Item = ({ nombre, img,id }) => {
           <div className="card-body">
             <h5 className="card-title">{nombre}</h5>
             <p>$20.000</p>
-            <Link to={`/producto/${id}`} className="btn btn-primary">
+            <Link to={`/producto/${id}`} className="btn btn-danger">
               Ver detalle
             </Link>
             

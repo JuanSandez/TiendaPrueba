@@ -21,9 +21,9 @@ const Footer = () => {
             alt=""
           />
         </div>
-        <h5>Contacto</h5>
+        <h6>Contacto</h6>
         <p>empresa@gmail.com | +541122339955 | Villa Ballester, General San Martín</p>
-        <h4>Creado por <Link>AJJ</Link></h4>
+        <h5>Creado por <Link>AJJ</Link></h5>
       </div>
     </>
   );

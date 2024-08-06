@@ -1,18 +1,23 @@
 .container-sucursal{
+    display: flex;
+    flex-direction: row;
     margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.container-sucursal-img img{
     width: 80%;
-    
-    position: relative;
 }
-.container-sucursal img:before{
-    content: "";
-    width: 100%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: linear-gradient(rgba(255,255,255,0));
+.container-sucursal-text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    width: 30%;
+    margin-right: 40px;
+    /* justify-content: center; */
 }
-.container-sucursal img{
-    width: 100%;
-    
+.material-symbols-outlined.map{
+    color: red;
 }

@@ -11,12 +11,10 @@ import Home from "./components/Home/Home";
 import Cart from "./components/Cart/Cart";
 import Register from "./components/Register/Register";
 import Logout from "./components/Logout/Logout";
-import ImagenCarousel from "./components/ImagenCarousel/ImagenCarousel";
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Footer from "./components/Footer/Footer";
-import Sucursal from "./components/Sucursal/Sucursal";
+import Checkout from "./components/Checkout/Checkout";
 
 function App() {
   
@@ -24,45 +22,30 @@ function App() {
   return (
     <>
       <ContextProvider>
+        <div className="container2">
+
         <BrowserRouter>
         <Navbar />
-            <ImagenCarousel/>
+            
           <Routes>
-            <Route path="/" element={<ItemListContainer title="Tienda" />} />
-            <Route
-              path="/categoria/:categoryId"
-              element={<ItemListContainer title="Tienda" />}
-            />
-            <Route
-              path="/producto/:productId"
-              element={<ItemDetailContainer />}
-            />
+            <Route path="/" element={<ItemListContainer title="¿Que llevas hoy?" />} />
+            <Route path="/categoria/:categoryId" element={<ItemListContainer title="Tienda" />}/>
+            <Route path="/producto/:productId" element={<ItemDetailContainer />}/>
             <Route path="/cart" element={<Cart />} />
             <Route path="/registro" element={<Register />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/login" element={<Login  />} /> 
+            <Route path="/checkout" element={<Checkout  />} /> 
             <Route path="*" element={<PageNotFound />} />
           </Routes>
-          <Sucursal />
+            
           <Footer/>
         </BrowserRouter>
+        </div>
       </ContextProvider>
     </>
   );
 }
 
 export default App;
-{
-  /* <UseRef /> */
-}
 
-{
-  /* {!user.length > 0 ? (
-  <Route path="/login" element={<Login setUser={setUser} />} />
-) : (
-  <Route
-    path="/login"
-    element={<Home user={user} setUser={setUser} />}
-  />
-)} */
-}

@@ -19,3 +19,25 @@
   .material-symbols-outlined.delete{
     color: black;
   }
+
+
+  @media (max-width: 990px) {
+    .material-symbols-outlined{
+      padding: 10px;
+      color: #fff;
+  }
+  .contador{
+    position: absolute;
+    top: 210px; 
+    left: 30px;
+    background: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+  }
+  }
+  

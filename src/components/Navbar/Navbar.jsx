@@ -46,7 +46,7 @@ const Navbar = () => {
       <nav className="navbar navbar-expand-lg bg-danger">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
-            Navbar
+            Logo
           </a>
           <button
             className="navbar-toggler"
